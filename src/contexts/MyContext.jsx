@@ -25,7 +25,9 @@ function MyContextProvider({ children }) {
 
   const allCategory = async () => {
     const list = await axios.get("/category");
-    console.log(list.data.list);
+    // console.log(list.data.list);
+    list.data.list.shift();
+    // list.data.list.unshift({ id: 0, categoryName: "SELECT" });
     setCategoryList(list.data.list);
   };
 
@@ -40,6 +42,7 @@ function MyContextProvider({ children }) {
     }
   }, []);
   console.log(user);
+
   return (
     <MyContext.Provider
       value={{

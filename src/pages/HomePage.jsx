@@ -3,21 +3,29 @@ import useMyContext from "../hooks/useContext";
 import { useState } from "react";
 import Modal from "../components/Modal";
 import AddListForm from "../features/AddListForm";
+import { useEffect } from "react";
+import axios from "../configs/axios";
 
 function HomePage() {
-  const date = new Date();
   const [onAdd, setOnAdd] = useState(false);
-  const result = date.toLocaleDateString("en-TH", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+
+  const fetchListCurrentDate = async () => {
+    try {
+      const data = await axios.get("/list/current");
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchListCurrentDate();
+  }, []);
 
   return (
     <div className="flex justify-center">
       <div className="w-[70vw] bg-rose-300 flex justify-between">
-        <div>{result}</div>
-        {/* <div>{sum}</div> */}
+        <div></div>
         <button
           onClick={() => {
             setOnAdd((r) => !r);
