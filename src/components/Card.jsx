@@ -1,10 +1,16 @@
 import React from "react";
 import dateFormat from "dateformat";
 import useMyContext from "../hooks/useContext";
+import { useState } from "react";
+import Modal from "./Modal";
+import { toast } from "react-toastify";
+import EditeListForm from "../features/EditeListForm";
 
-function Card({ data, all }) {
+function Card({ data, all, editFunc, index }) {
   const { categoryId, amount, note, transactionType, category, createdAt } =
     data;
+
+  const [open, setOpen] = useState(false);
 
   //   const date = "a";
   // const date = createdAt
@@ -21,29 +27,46 @@ function Card({ data, all }) {
   //   console.log(a);
   //   const date = dateFormat(createdAt, "h:MM");
   //   console.log(createdAt);
-
   return (
-    <div
-      role="button"
-      className="bg-white rounded-lg p-4 hover:scale-110 transition dulation-500 hover:shadow-[0_0_16px_#D9D9D9]"
-    >
-      <div className="flex justify-between">
-        <div>
-          <div className="text-xl">{category.categoryName}</div>
-          <div>note : {note}</div>
-        </div>
-        <div>
-          <div
-            className={`text-4xl text-end ${
-              transactionType == "INCOME" ? "text-[#2e8d4e]" : "text-red-400"
-            }`}
-          >
-            {amount} ฿
+    <>
+      {open ? (
+        <Modal onClose={() => setOpen(false)} title={"Edite"} width={25}>
+          <EditeListForm
+            index={index}
+            data={data}
+            editFunc={editFunc}
+            onClose={() => setOpen(false)}
+          />
+        </Modal>
+      ) : (
+        ""
+      )}
+      <div
+        onClick={() => {
+          setOpen(true);
+        }}
+        role="button"
+        className="bg-white rounded-lg p-4 hover:scale-110 transition dulation-500 hover:shadow-[0_0_16px_#D9D9D9]"
+      >
+        <div className="flex justify-between">
+          <div>
+            <div className="text-xl">{category.categoryName}</div>
+            <div>note : {note}</div>
           </div>
-          <div className="text-end">{date}</div>
+          <div>
+            <div
+              className={`text-4xl text-end ${
+                transactionType == "INCOME" ? "text-[#2e8d4e]" : "text-red-400"
+              }`}
+            >
+              {transactionType == "INCOME" ? "+" : "-"}
+              {amount} ฿
+            </div>
+            <div className="text-end">{date}</div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

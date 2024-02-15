@@ -22,11 +22,15 @@ function HomePage() {
 
   //
   //
-  const handleEdit = async (id, dataUpdate, state, setState) => {
-    // const edit = await axios.
-
+  //
+  //
+  const editFunc = async (id, dataUpdate, state, setState) => {
     const data = array.map((a) => Object.assign({}, a));
 
+    // เอามาเช็ควันเฉยๆ
+    // if (DATA.data.data.createdAt.slice(0, 10) != Currentdate.slice(0, 10)) {
+    //   return;
+    // }
     for (let i of data) {
       if (i.id == id) {
         i.body = update;
@@ -38,6 +42,16 @@ function HomePage() {
   };
   //
   //
+  //
+  //
+  const sum = allListToday.reduce((acc, item) => {
+    if (item.categoryId == 1) {
+      acc += item.amount;
+    } else {
+      acc -= item.amount;
+    }
+    return acc;
+  }, 0);
 
   useEffect(() => {
     fetchListCurrentDate();
@@ -46,8 +60,15 @@ function HomePage() {
   return (
     <div className="flex justify-center bg-gradient-to-b from-cyan-500 to-blue-500 h-[calc(100vh-56px)] overflow-auto">
       <div className="w-[70vw]">
-        <div className="bg-rose-300 flex justify-between">
+        <div className="flex justify-between">
           <div></div>
+          <div className="bg-[#006094] p-5 rounded-b-3xl text-white">
+            {sum.toLocaleString("en-US", {
+              style: "currency",
+              currency: "THB",
+            })}
+          </div>
+
           <button
             onClick={() => {
               setOnAdd((r) => !r);
@@ -67,8 +88,13 @@ function HomePage() {
         </div>
         <div className="flex justify-center">
           <div className="w-[60vw] flex flex-col gap-4 mt-4">
-            {allListToday.map((item) => (
-              <Card key={item.id} data={item} />
+            {allListToday.map((item, index) => (
+              <Card
+                index={index}
+                key={item.id}
+                data={item}
+                editFunc={editFunc}
+              />
             ))}
           </div>
         </div>

@@ -96,6 +96,7 @@ function AddListForm({ onClose, setAllListToday, allListToday }) {
       console.log(err);
     }
   };
+  console.log(insert);
 
   return (
     <div className="py-4 px-14">
