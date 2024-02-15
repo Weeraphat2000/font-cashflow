@@ -15,10 +15,10 @@ function Menu() {
   const list = [
     { title: "Home", to: "/", id: 1 },
     { title: "Activity", to: "/activity", id: 2 },
-    { title: "Account summary", to: "/summary", id: 3 },
+    { title: `Summary`, to: "/summary", id: 3 },
   ];
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 items-center">
       {list.map((item) => (
         <Items key={item.id} item={item} />
       ))}

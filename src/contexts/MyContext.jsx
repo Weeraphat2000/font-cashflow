@@ -41,7 +41,7 @@ function MyContextProvider({ children }) {
       allCategory();
     }
   }, []);
-  console.log(user);
+  // console.log(user);
 
   return (
     <MyContext.Provider

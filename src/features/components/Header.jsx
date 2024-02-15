@@ -5,7 +5,7 @@ import Dropdown from "../layouts/Dropdown";
 
 function Header() {
   return (
-    <header className="grid grid-cols-3 bg-white shadow px-4 items-center ">
+    <header className="grid grid-cols-3 bg-[#006094] shadow px-4 items-center text-white">
       <Link to={"/"}>
         <div className="text-center p-3">cashflow</div>
       </Link>

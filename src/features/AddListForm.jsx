@@ -9,7 +9,9 @@ import "react-calendar/dist/Calendar.css";
 import { toast } from "react-toastify";
 import validateCreateList from "./validations/validate-createList";
 
-function AddListForm({ onClose }) {
+function AddListForm({ onClose, setAllListToday, allListToday }) {
+  const [date, setDate] = useState("");
+  const [hr, setHr] = useState("");
   const [error, setError] = useState({
     amount: "",
     categoryId: "1",
@@ -28,7 +30,6 @@ function AddListForm({ onClose }) {
 
   //
   const Currentdate = dateFormat(new Date(), "yyyy-mm-dd'T'HH:MM:ss.ms'Z'");
-  // console.log(Currentdate);
   //
 
   const handleChange = (e) => {
@@ -77,17 +78,24 @@ function AddListForm({ onClose }) {
       } else {
         data.createdAt = Currentdate;
       }
-      console.log(data.createdAt);
+
       toast.success("created");
-      await addList(data);
+      const DATA = await addList(data);
       onClose();
+
+      if (DATA.data.data.createdAt.slice(0, 10) != Currentdate.slice(0, 10)) {
+        return;
+      }
+      const index = allListToday.findIndex(
+        (item) => item.createdAt < DATA.data.data.createdAt
+      );
+      const array = [...allListToday];
+      array.splice(index, 0, DATA.data.data);
+      setAllListToday(array);
     } catch (err) {
       console.log(err);
     }
   };
-
-  const [date, setDate] = useState("");
-  const [hr, setHr] = useState("");
 
   return (
     <div className="py-4 px-14">
@@ -212,7 +220,7 @@ function AddListForm({ onClose }) {
           </div>
 
           <div className="flex justify-end">
-            <button className="px-4 py-2 bg-blue-500 rounded-lg hover:bg-blue-600 hover:text-white">
+            <button className="hover:scale-110 transition dulation-500 px-4 text-white py-2 bg-gray-400 rounded-lg hover:bg-green-500 hover:text-white">
               submit
             </button>
           </div>
