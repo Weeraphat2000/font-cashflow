@@ -24,22 +24,21 @@ function HomePage() {
   //
   //
   //
-  const editFunc = async (id, dataUpdate, state, setState) => {
-    const data = array.map((a) => Object.assign({}, a));
-
-    // เอามาเช็ควันเฉยๆ
-    // if (DATA.data.data.createdAt.slice(0, 10) != Currentdate.slice(0, 10)) {
-    //   return;
-    // }
-    for (let i of data) {
-      if (i.id == id) {
-        i.body = update;
-      }
-      // return data
-    }
-    return data;
-    // setstate(data)
-  };
+  // const editFunc = async (dataUpdate, state, setState, id) => {
+  // const data = array.map((a) => Object.assign({}, a));
+  // เอามาเช็ควันเฉยๆ
+  // if (DATA.data.data.createdAt.slice(0, 10) != Currentdate.slice(0, 10)) {
+  //   return;
+  // }
+  // for (let i of data) {
+  //   if (i.id == id) {
+  //     i.body = update;
+  //   }
+  //   // return data
+  // }
+  // return data;
+  // setstate(data)
+  // };
   //
   //
   //
@@ -93,7 +92,9 @@ function HomePage() {
                 index={index}
                 key={item.id}
                 data={item}
-                editFunc={editFunc}
+                // editFunc={editFunc}
+                setState={setAllListToday}
+                state={allListToday}
               />
             ))}
           </div>

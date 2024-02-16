@@ -1,26 +1,68 @@
+import axios from "../configs/axios";
 import React from "react";
 import { useState } from "react";
 import useMyContext from "../hooks/useContext";
 import { toast } from "react-toastify";
+import Modal from "../components/Modal";
 
-function EditeListForm({ data, editFunc, onClose, index }) {
+function EditeListForm({ data, editFunc, onClose, index, state, setState }) {
   const [date, setDate] = useState(data.createdAt.split("T")[0]);
   const [hr, setHr] = useState(
     data.createdAt.split("T")[1].split(":").slice(0, 2).join(":")
   );
   const { categoryList } = useMyContext();
   const [edit, setEdit] = useState(data);
+  const [open, setOpen] = useState(false);
 
+  const [e, setE] = useState(false);
   const handleChange = (e) => {
+    if (e.target.name == "amount" && isNaN(+e.target.value)) {
+      setE(true);
+      return;
+    }
+    if (e.target.name == "amount") {
+      setE(false);
+    }
+
     setEdit({ ...edit, [e.target.name]: e.target.value });
   };
+
+  //
+  // edit
+  const editList = async (dataUpdate, state, setState, id, index) => {
+    delete dataUpdate.category;
+    delete dataUpdate.id;
+    delete dataUpdate.userId;
+
+    const newData = await axios.patch(`/list/${id}`, dataUpdate);
+    console.log(newData);
+
+    const newState = [...state];
+    newState.splice(index, 1);
+
+    setState([newData.data.data, ...newState]);
+    // console.log(dataUpdate);
+    // console.log(id);
+  };
+  //
+  //
+
+  //
+  // edit
   const handlSubmit = (e) => {
     console.log({ ...edit, createdAt: date + "T" + hr + ":00.000Z" });
     e.preventDefault();
     toast.success("edited");
+
+    //
+    //
+    const dataUpdate = { ...edit, createdAt: date + "T" + hr + ":00.000Z" };
+    editList(dataUpdate, state, setState, data.id, index);
     onClose();
-    edit(id, dataUpdate);
   };
+  //
+  //
+
   const checked1 = edit.transactionType == "EXPENSE" ? true : false;
   const checked2 = edit.transactionType == "INCOME" ? true : false;
   //   console.log("date", edit.createdAt.split("T")[0]);
@@ -28,11 +70,51 @@ function EditeListForm({ data, editFunc, onClose, index }) {
   //     "hr",
   //     edit.createdAt.split("T")[1].split(":").slice(0, 2).join(":")
   //   );
+
+  //
+  //
+  const handleDeleteList = async () => {
+    // console.log(".");
+    // console.log(index);
+    // console.log("*");
+    // console.log(data.id);
+    await axios.delete(`/list/${data.id}`);
+
+    const data1 = [...state];
+    data1.splice(index, 1);
+    console.log(data1);
+
+    setState(data1);
+    toast.success("deleted");
+  };
+  //
   console.log(date);
   console.log(hr);
-  console.log(index);
+  //
   return (
     <div className="py-4 px-14">
+      {open ? (
+        <Modal
+          width={25}
+          onClose={() => setOpen(false)}
+          title={"จะลบจริงๆเหรอ"}
+        >
+          <div className="flex justify-around p-5">
+            <button
+              onClick={handleDeleteList}
+              className="p-5 rounded-2xl hover:text-white hover:bg-red-500 px-10 py-2"
+            >
+              Yes
+            </button>
+            <button
+              className="p-5 rounded-2xl hover:text-white hover:bg-blue-500 px-10 py-2"
+              onClick={() => setOpen(false)}
+            >
+              No
+            </button>
+          </div>
+        </Modal>
+      ) : null}
       <form onSubmit={handlSubmit}>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col">
@@ -47,6 +129,7 @@ function EditeListForm({ data, editFunc, onClose, index }) {
               name="amount"
               value={edit.amount}
             />
+            {e ? <label className="text-red-500">Number only</label> : null}
           </div>
           <div className="flex flex-col">
             <label htmlFor="note">Note</label>
@@ -133,7 +216,10 @@ function EditeListForm({ data, editFunc, onClose, index }) {
             </div>
           </div>
 
-          <div className="flex justify-end">
+          <div className="flex justify-between">
+            <div role="button" onClick={() => setOpen(true)}>
+              DEL
+            </div>
             <button className="hover:scale-110 transition dulation-500 px-4 text-white py-2 bg-gray-400 rounded-lg hover:bg-green-500 hover:text-white">
               submit
             </button>

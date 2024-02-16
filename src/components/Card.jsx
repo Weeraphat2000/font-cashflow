@@ -6,7 +6,7 @@ import Modal from "./Modal";
 import { toast } from "react-toastify";
 import EditeListForm from "../features/EditeListForm";
 
-function Card({ data, all, editFunc, index }) {
+function Card({ data, all, editFunc, index, setState, state }) {
   const { categoryId, amount, note, transactionType, category, createdAt } =
     data;
 
@@ -27,6 +27,7 @@ function Card({ data, all, editFunc, index }) {
   //   console.log(a);
   //   const date = dateFormat(createdAt, "h:MM");
   //   console.log(createdAt);
+
   return (
     <>
       {open ? (
@@ -34,7 +35,9 @@ function Card({ data, all, editFunc, index }) {
           <EditeListForm
             index={index}
             data={data}
-            editFunc={editFunc}
+            // editFunc={editFunc}
+            state={state}
+            setState={setState}
             onClose={() => setOpen(false)}
           />
         </Modal>
@@ -60,7 +63,10 @@ function Card({ data, all, editFunc, index }) {
               }`}
             >
               {transactionType == "INCOME" ? "+" : "-"}
-              {amount} ฿
+              {amount.toLocaleString("en-US", {
+                style: "currency",
+                currency: "THB",
+              })}
             </div>
             <div className="text-end">{date}</div>
           </div>

@@ -20,8 +20,24 @@ function ActivityPage() {
       <div className="w-[70vw]">
         <div className="flex justify-center">
           <div className="w-[60vw] flex flex-col gap-4 mt-4">
-            {allList.map((item) => (
-              <Card key={item.id} data={item} all={true} />
+            {allList.map((item, index) => (
+              // <Card
+              //   index={index}
+              //   key={item.id}
+              //   data={item}
+              //   // editFunc={editFunc}
+              //   setState={setAllListToday}
+              //   state={allListToday}
+              // />
+
+              <Card
+                index={index}
+                key={item.id}
+                data={item}
+                all={true}
+                setState={setAllList}
+                state={allList}
+              />
             ))}
           </div>
         </div>
