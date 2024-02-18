@@ -25,7 +25,8 @@ const options = {
 //   };
 
 function PieGraph({ data }) {
-  if (data == undefined) {
+  console.log(data);
+  if (data.length == 0) {
     return;
   }
   const value = [];

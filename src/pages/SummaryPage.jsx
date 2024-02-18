@@ -38,7 +38,7 @@ export function SummaryPage() {
       <div className="w-96">
         <MonthDashboard />
       </div>
-      <div>
+      <div className="w-96">
         <YearDashboard />
       </div>
     </div>

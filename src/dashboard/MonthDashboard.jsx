@@ -19,16 +19,7 @@ function MonthDashboard() {
   const runLine = async () => {
     const result = await axios.get("/dashboard/current-month-line");
 
-    console.log(result.data.data);
-
-    const arr = [...result.data.data];
-    // console.log(+arr[0].date.split("T")[0].split("-")[2] + 1);
-    // console.log(arr[0].date);
-    // console.log(typeof arr[0].date);
-
-    // const currentDate = new Date(new Date().getTime() + 7 * 60 * 60 * 1000); // วันปัจจุบัน
-    // console.log(currentDate);
-    // setDataLine(result.data.data);
+    setDataLine(result.data.data);
   };
 
   useEffect(() => {

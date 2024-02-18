@@ -48,7 +48,7 @@ function DoughnutGraph({ data }) {
     labels: label,
     datasets: [
       {
-        label: "# of Votes",
+        label: "THB",
         data: value,
         backgroundColor: [
           "rgba(75, 192, 192, 0.2)",

@@ -49,7 +49,7 @@ function EditeListForm({ data, editFunc, onClose, index, state, setState }) {
     delete dataUpdate.userId;
 
     const newData = await axios.patch(`/list/${id}`, dataUpdate);
-    console.log(newData);
+    // console.log(newData);
 
     const newState = [...state];
     newState.splice(index, 1);
@@ -64,7 +64,7 @@ function EditeListForm({ data, editFunc, onClose, index, state, setState }) {
   //
   // edit
   const handlSubmit = (e) => {
-    console.log({ ...edit, createdAt: date + "T" + hr + ":00.000Z" });
+    // console.log({ ...edit, createdAt: date + "T" + hr + ":00.000Z" });
     e.preventDefault();
 
     if (edit.transactionType == "EXPENSE" && edit.categoryId == 1) {
@@ -101,14 +101,14 @@ function EditeListForm({ data, editFunc, onClose, index, state, setState }) {
 
     const data1 = [...state];
     data1.splice(index, 1);
-    console.log(data1);
+    // console.log(data1);
 
     setState(data1);
     toast.success("deleted");
   };
   //
-  console.log(date);
-  console.log(hr);
+  //   console.log(date);
+  //   console.log(hr);
   //
   return (
     <div className="py-4 px-14">
