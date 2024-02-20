@@ -17,8 +17,7 @@ function DayDashboard() {
     run();
   }, []);
   return (
-    <div className="flex">
-      <div>Today</div>
+    <div className="flex justify-center gap-[5vw] border border-collapse">
       <div>
         <PieGraph data={data} />
       </div>

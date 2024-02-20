@@ -33,9 +33,8 @@ function YearDashboard() {
     runBar();
   }, []);
   return (
-    <div>
+    <div className="flex flex-col items-center border">
       <div className="flex">
-        <div>Current year</div>
         <div>
           <PieGraph data={data} />
         </div>

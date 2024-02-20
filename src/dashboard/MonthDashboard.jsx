@@ -34,9 +34,8 @@ function MonthDashboard() {
   }, []);
 
   return (
-    <div>
-      <div className="flex">
-        <div>Current month</div>
+    <div className="flex flex-col items-center border">
+      <div className="flex justify-center gap-[5vw]">
         <div>
           <PieGraph data={data} />
         </div>

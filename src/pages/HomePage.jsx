@@ -60,29 +60,31 @@ function HomePage() {
   }, []);
   return (
     <div className="flex justify-center bg-gradient-to-b from-cyan-500 to-blue-500 h-[calc(100vh-56px)] overflow-auto">
-      <div className="w-[70vw] ">
-        <div className="flex justify-center ">
-          <button className="text-">a</button>
+      <div className="w-[70vw] bg-red-">
+        <div className="flex justify-between">
+          <div className="invisible">
+            <button className="invisible">s</button>
+          </div>
           <div
             className={`${
               sum >= 0 ? "text-green-500" : "text-red-500"
-            } p-5 text-2xl bg-white rounded my-4  w-[60vw] text-center`}
+            } p-5 text-4xl bg-white rounded my-4  w-[60vw] text-center`}
           >
             {sum.toLocaleString("en-US", {
               style: "currency",
               currency: "THB",
             })}
           </div>
+
           <button
             onClick={() => {
               setOnAdd((r) => !r);
             }}
           >
             <div>
-              <GrUpload className=" scale-[200%] text-white" />
+              <GrUpload className="scale-[200%] text-white" />
             </div>
           </button>
-
           {onAdd && (
             <Modal width={25} title={"Create"} onClose={() => setOnAdd(false)}>
               <AddListForm
