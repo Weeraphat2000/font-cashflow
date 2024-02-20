@@ -6,7 +6,7 @@ import RegisterForm from "./RegisterForm";
 import useMyContext from "../hooks/useContext";
 import { findMeApi } from "../apis/auth";
 
-function LoginForm() {
+function LoginForm({ children }) {
   const { login, setUser } = useMyContext();
   const [register, setRegister] = useState({ username: "", password: "" });
   const [openModal, setOpenModal] = useState(false);
@@ -19,6 +19,7 @@ function LoginForm() {
       //   return;
       // }
       toast.success("register");
+      console.log(user.data.user);
       setUser(user.data.user);
       localStorage.setItem("token", user.data.token);
     } catch (err) {
@@ -81,6 +82,7 @@ function LoginForm() {
           create new account ?
         </button>
       </form>
+      <div className="flex justify-center">{children}</div>
     </div>
   );
 }
