@@ -25,7 +25,6 @@ const options = {
 //   };
 
 function PieGraph({ data }) {
-  console.log(data);
   if (data.length == 0) {
     return;
   }
@@ -56,6 +55,13 @@ function PieGraph({ data }) {
           "rgba(255, 206, 86, 0.2)",
           "rgba(153, 102, 255, 0.2)",
           "rgba(255, 159, 64, 0.2)",
+
+          "rgba(204,255,64, 0.2)",
+          "rgba(64,255,245,0.2)",
+          "rgba(64,67,255,0.2)",
+          "rgba(201,64,255,0.2)",
+          "rgba(255,64,64,0.2)",
+          "rgba(83,255,64,0.2)",
         ],
         borderColor: [
           "rgba(255, 99, 132, 1)",
@@ -64,6 +70,13 @@ function PieGraph({ data }) {
           "rgba(255, 206, 86, 1)",
           "rgba(153, 102, 255, 1)",
           "rgba(255, 159, 64, 1)",
+
+          "#ccff40",
+          "#40fff5",
+          "#4043ff",
+          "#c940ff",
+          "#ff4040",
+          "#53ff40",
         ],
         borderWidth: 1,
       },

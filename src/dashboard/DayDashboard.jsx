@@ -16,9 +16,9 @@ function DayDashboard() {
   useEffect(() => {
     run();
   }, []);
-  //   console.log(data);
   return (
     <div className="flex">
+      <div>Today</div>
       <div>
         <PieGraph data={data} />
       </div>

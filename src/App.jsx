@@ -1,11 +1,8 @@
-import { useState } from "react";
-import useMyContext from "./hooks/useContext";
 import Router from "./routes/route";
 import { ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const { a } = useMyContext();
   return (
     <>
       <Router />

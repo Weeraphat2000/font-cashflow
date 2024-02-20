@@ -13,10 +13,8 @@ function LoginPage() {
       //     backgroundSize: "cover",
       //   }}
     >
-      {/* <div className="w-[70vw] h-[60vh]"> */}
       <img src={image} alt="" width={500} className="rounded-lg" />
       <LoginForm />
-      {/* </div> */}
     </div>
   );
 }

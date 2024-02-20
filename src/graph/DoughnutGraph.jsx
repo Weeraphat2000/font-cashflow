@@ -40,10 +40,6 @@ function DoughnutGraph({ data }) {
   const value = data.map((item) => item.sum);
   const label = data.map((item) => item.category_name);
 
-  //   console.log(data);
-  //   console.log(value);
-  //   console.log(label);
-
   const doughnut = {
     labels: label,
     datasets: [

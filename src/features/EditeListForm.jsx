@@ -44,22 +44,18 @@ function EditeListForm({ data, editFunc, onClose, index, state, setState }) {
   //
   // edit
   const editList = async (dataUpdate, state, setState, id, index) => {
-    delete dataUpdate.category;
-    delete dataUpdate.id;
-    delete dataUpdate.userId;
-
-    const newData = await axios.patch(`/list/${id}`, dataUpdate);
-    // console.log(newData);
-
-    const newState = [...state];
-    newState.splice(index, 1);
-
-    setState([newData.data.data, ...newState]);
-    // console.log(dataUpdate);
-    // console.log(id);
+    try {
+      delete dataUpdate.category;
+      delete dataUpdate.id;
+      delete dataUpdate.userId;
+      const newData = await axios.patch(`/list/${id}`, dataUpdate);
+      const newState = [...state];
+      newState.splice(index, 1);
+      setState([newData.data.data, ...newState]);
+    } catch (erro) {
+      toast.error(erro.response.data.message);
+    }
   };
-  //
-  //
 
   //
   // edit
@@ -73,14 +69,10 @@ function EditeListForm({ data, editFunc, onClose, index, state, setState }) {
     }
     toast.success("edited");
 
-    //
-    //
     const dataUpdate = { ...edit, createdAt: date + "T" + hr + ":00.000Z" };
     editList(dataUpdate, state, setState, data.id, index);
     onClose();
   };
-  //
-  //
 
   const checked1 = edit.transactionType == "EXPENSE" ? true : false;
   const checked2 = edit.transactionType == "INCOME" ? true : false;
@@ -90,26 +82,16 @@ function EditeListForm({ data, editFunc, onClose, index, state, setState }) {
   //     edit.createdAt.split("T")[1].split(":").slice(0, 2).join(":")
   //   );
 
-  //
-  //
   const handleDeleteList = async () => {
-    // console.log(".");
-    // console.log(index);
-    // console.log("*");
-    // console.log(data.id);
     await axios.delete(`/list/${data.id}`);
 
     const data1 = [...state];
     data1.splice(index, 1);
-    // console.log(data1);
 
     setState(data1);
     toast.success("deleted");
   };
-  //
-  //   console.log(date);
-  //   console.log(hr);
-  //
+
   return (
     <div className="py-4 px-14">
       {open ? (

@@ -58,9 +58,9 @@ function RegisterForm({ onClose }) {
       onClose();
     } catch (er) {
       console.log(er);
+      toast.error(er.response.data.message);
     }
   };
-  // console.log(register);
   return (
     <div className="px-10 py-4">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">

@@ -11,18 +11,20 @@ function LoginForm() {
   const [register, setRegister] = useState({ username: "", password: "" });
   const [openModal, setOpenModal] = useState(false);
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const user = await findMeApi(register);
-    console.log(user);
-    if (user.data.message == "username or password invalid") {
-      toast.error("username or password invalid");
-      return;
+    try {
+      e.preventDefault();
+      const user = await findMeApi(register);
+      // if (user.data.message == "username or password invalid") {
+      //   toast.error("username or password invalid");
+      //   return;
+      // }
+      toast.success("register");
+      setUser(user.data.user);
+      localStorage.setItem("token", user.data.token);
+    } catch (err) {
+      console.log(err);
+      toast.error(err.response.data.message);
     }
-
-    toast.success("register");
-    setUser(user.data.user);
-    localStorage.setItem("token", user.data.token);
   };
   const handleChange = (e) => {
     setRegister({ ...register, [e.target.name]: e.target.value });

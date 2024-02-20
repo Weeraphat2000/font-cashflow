@@ -9,12 +9,10 @@ const options = {
     },
     title: {
       display: true,
-      text: "Chart.js Line Chart",
+      text: "กราฟแสเงความสัมพันธ์ระหว่างเงินกับวัน",
     },
   },
 };
-
-const label = ["January", "February", "March", "April", "May", "June", "July"];
 
 function LineGraph({ data }) {
   const today = new Date().toISOString();
@@ -44,10 +42,6 @@ function LineGraph({ data }) {
     }
     len.push(i);
   }
-  //   console.log("data", data);
-  //   console.log("income", income);
-  //   console.log("expense", expense);
-  //   console.log("len", len);
 
   //
   const line = {
@@ -68,7 +62,7 @@ function LineGraph({ data }) {
     ],
   };
   return (
-    <div className="w-96 h-96">
+    <div>
       <Line options={options} data={line} />
     </div>
   );

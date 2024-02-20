@@ -6,6 +6,8 @@ import AddListForm from "../features/AddListForm";
 import { useEffect } from "react";
 import Card from "../components/Card";
 import { listCurrentDate } from "../apis/list";
+import { toast } from "react-toastify";
+import { GrUpload } from "react-icons/gr";
 
 function HomePage() {
   const [onAdd, setOnAdd] = useState(false);
@@ -17,6 +19,7 @@ function HomePage() {
       setAllListToday(data.data.data);
     } catch (err) {
       console.log(err);
+      toast.error(err.response.data.message);
     }
   };
 
@@ -55,26 +58,31 @@ function HomePage() {
   useEffect(() => {
     fetchListCurrentDate();
   }, []);
-  // console.log(allListToday);
   return (
     <div className="flex justify-center bg-gradient-to-b from-cyan-500 to-blue-500 h-[calc(100vh-56px)] overflow-auto">
-      <div className="w-[70vw]">
-        <div className="flex justify-between">
-          <div></div>
-          <div className="bg-[#006094] p-5 rounded-b-3xl text-white">
+      <div className="w-[70vw] ">
+        <div className="flex justify-center ">
+          <button className="text-">a</button>
+          <div
+            className={`${
+              sum >= 0 ? "text-green-500" : "text-red-500"
+            } p-5 text-2xl bg-white rounded my-4  w-[60vw] text-center`}
+          >
             {sum.toLocaleString("en-US", {
               style: "currency",
               currency: "THB",
             })}
           </div>
-
           <button
             onClick={() => {
               setOnAdd((r) => !r);
             }}
           >
-            add
+            <div>
+              <GrUpload className=" scale-[200%] text-white" />
+            </div>
           </button>
+
           {onAdd && (
             <Modal width={25} title={"Create"} onClose={() => setOnAdd(false)}>
               <AddListForm

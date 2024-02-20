@@ -94,9 +94,9 @@ function AddListForm({ onClose, setAllListToday, allListToday }) {
       setAllListToday(array);
     } catch (err) {
       console.log(err);
+      toast.error(err.response.data.message);
     }
   };
-  console.log(insert);
 
   return (
     <div className="py-4 px-14">
