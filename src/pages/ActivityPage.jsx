@@ -31,11 +31,22 @@ function ActivityPage() {
     <div className="flex justify-center bg-gradient-to-b from-cyan-500 to-blue-500 h-[calc(100vh-56px)] overflow-auto">
       <div className="w-[70vw]">
         <div className="flex justify-center">
-          <div>
-            <input type="date" onChange={handleChange} value={search} />
-            <button onClick={() => setSearch("")}>reset</button>
-          </div>
           <div className="w-[60vw] flex flex-col gap-4 mt-4">
+            <div className="flex justify-center gap-4 bg-white rounded-lg">
+              <div className="flex items-center">select date transaction :</div>
+              <input
+                // className="bg-cyan-500"
+                type="date"
+                onChange={handleChange}
+                value={search}
+              />
+              <button
+                className="hover:bg-red-500 hover:scale-110 transition dulation-500 text-white px-4 py-1 bg-green-500 my-2 rounded-xl"
+                onClick={() => setSearch("")}
+              >
+                reset
+              </button>
+            </div>
             {search
               ? searchlist.map((item, index) => (
                   <Card

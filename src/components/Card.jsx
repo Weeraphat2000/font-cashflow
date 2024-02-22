@@ -19,7 +19,7 @@ function Card({ data, all, editFunc, index, setState, state }) {
   //   .split(":")
   //   .slice(0, 2)
   //   .join(":");
-
+  //   console.log(data);
   const date =
     (all ? createdAt.split("T")[0] + " " : "") +
     createdAt.split("T")[1].split(".")[0].split(":").slice(0, 2).join(":");
@@ -31,7 +31,7 @@ function Card({ data, all, editFunc, index, setState, state }) {
   return (
     <>
       {open ? (
-        <Modal onClose={() => setOpen(false)} title={"Edite"} width={25}>
+        <Modal onClose={() => setOpen(false)} title={"Edit"} width={25}>
           <EditeListForm
             index={index}
             data={data}
@@ -55,6 +55,7 @@ function Card({ data, all, editFunc, index, setState, state }) {
           <div>
             <div className="text-xl">{category.categoryName}</div>
             <div>note : {note}</div>
+            {data.updatedAt ? <p className="text-gray-400">Edited</p> : null}
           </div>
           <div>
             <div

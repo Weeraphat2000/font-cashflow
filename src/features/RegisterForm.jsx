@@ -47,11 +47,11 @@ function RegisterForm({ onClose }) {
 
       const user = await registerApi(register);
 
-      if (user.data.message == "Email or mobile already in use") {
-        setError({ ...error, inUse: "Email or mobile already in use" });
-        toast.error("register false");
-        return;
-      }
+      // if (user.data.message == "Email or mobile already in use") {
+      //   setError({ ...error, inUse: "Email or mobile already in use" });
+      //   toast.error("register false");
+      //   return;
+      // }
       toast.success("register success");
 
       creatRegister(user);

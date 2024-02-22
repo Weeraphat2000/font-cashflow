@@ -15,6 +15,7 @@ const options = {
 };
 
 function LineGraph({ data }) {
+  console.log(data);
   const today = new Date().toISOString();
 
   const dayExpense = data.filter((item) => item.TransactionType == "EXPENSE");

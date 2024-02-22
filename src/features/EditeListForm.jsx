@@ -4,6 +4,7 @@ import { useState } from "react";
 import useMyContext from "../hooks/useContext";
 import { toast } from "react-toastify";
 import Modal from "../components/Modal";
+import { ImBin } from "react-icons/im";
 
 function EditeListForm({ data, editFunc, onClose, index, state, setState }) {
   const [date, setDate] = useState(data.createdAt.split("T")[0]);
@@ -98,7 +99,7 @@ function EditeListForm({ data, editFunc, onClose, index, state, setState }) {
         <Modal
           width={25}
           onClose={() => setOpen(false)}
-          title={"จะลบจริงๆเหรอ"}
+          title={"Are you sure ?"}
         >
           <div className="flex justify-around p-5">
             <button
@@ -222,7 +223,7 @@ function EditeListForm({ data, editFunc, onClose, index, state, setState }) {
 
           <div className="flex justify-between">
             <div role="button" onClick={() => setOpen(true)}>
-              DEL
+              <ImBin className="text-red-500 text-2xl" />
             </div>
             <button className="hover:scale-110 transition dulation-500 px-4 text-white py-2 bg-gray-400 rounded-lg hover:bg-green-500 hover:text-white">
               submit

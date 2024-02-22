@@ -79,7 +79,6 @@ function AddListForm({ onClose, setAllListToday, allListToday }) {
         data.createdAt = Currentdate;
       }
 
-      toast.success("created");
       const DATA = await addList(data);
       onClose();
 
@@ -92,6 +91,7 @@ function AddListForm({ onClose, setAllListToday, allListToday }) {
       const array = [...allListToday];
       array.splice(index, 0, DATA.data.data);
       setAllListToday(array);
+      toast.success("created");
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.message);

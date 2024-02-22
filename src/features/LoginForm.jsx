@@ -19,7 +19,7 @@ function LoginForm({ children }) {
       //   return;
       // }
       toast.success("register");
-      console.log(user.data.user);
+      // console.log(user.data.user);
       setUser(user.data.user);
       localStorage.setItem("token", user.data.token);
     } catch (err) {

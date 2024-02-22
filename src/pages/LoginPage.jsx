@@ -17,7 +17,6 @@ function LoginPage() {
   const back = async (res) => {
     // console.log(res);
     const user = await axios.post("/loginWithFace", { id: res.id });
-    console.log(user);
     setUser(user.data.message);
     localStorage.setItem("token", user.data.token);
   };
