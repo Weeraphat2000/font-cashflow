@@ -41,7 +41,7 @@ function EditeListForm({ data, editFunc, onClose, index, state, setState }) {
     setEdit(list);
     // setEdit({ ...edit, [e.target.name]: e.target.value });
   };
-
+  console.log(edit.createdAt);
   //
   // edit
   const editList = async (dataUpdate, state, setState, id, index) => {
@@ -64,14 +64,29 @@ function EditeListForm({ data, editFunc, onClose, index, state, setState }) {
     // console.log({ ...edit, createdAt: date + "T" + hr + ":00.000Z" });
     e.preventDefault();
 
+    // console.log(
+    //   new Date(new Date().setHours(new Date().getHours() + 8)).toISOString()
+    // );
+
+    // console.log(edit.createdAt);
+
     if (edit.transactionType == "EXPENSE" && edit.categoryId == 1) {
       setT(true);
       return;
     }
-    toast.success("edited");
 
     const dataUpdate = { ...edit, createdAt: date + "T" + hr + ":00.000Z" };
+
+    if (
+      new Date(new Date().setHours(new Date().getHours() + 8)).toISOString() <
+      dataUpdate.createdAt
+    ) {
+      toast.error("ล่วงหน้าไม่ได้นะจ้ะ");
+      return;
+    }
+
     editList(dataUpdate, state, setState, data.id, index);
+    toast.success("edited");
     onClose();
   };
 

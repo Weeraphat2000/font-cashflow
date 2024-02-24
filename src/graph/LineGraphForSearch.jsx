@@ -22,14 +22,14 @@ function LineGraphForSearch({ dataLine }) {
   let startIndexIncome = 0;
   let startIndexExpense = 0;
   for (let i = 0; i < labels.length; i++) {
-    if (dayExpense[startIndexExpense].date.includes(labels[i])) {
+    if (dayExpense[startIndexExpense]?.date.includes(labels[i])) {
       expense.push(dayExpense[startIndexExpense].sum);
       startIndexExpense += 1;
     } else {
       expense.push(0);
     }
 
-    if (dayIncome[startIndexIncome].date.includes(labels[i])) {
+    if (dayIncome[startIndexIncome]?.date.includes(labels[i])) {
       income.push(dayIncome[startIndexIncome].sum);
       startIndexIncome += 1;
     } else {

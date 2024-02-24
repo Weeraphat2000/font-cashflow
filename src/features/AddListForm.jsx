@@ -79,6 +79,23 @@ function AddListForm({ onClose, setAllListToday, allListToday }) {
         data.createdAt = Currentdate;
       }
 
+      if (
+        new Date(new Date().setHours(new Date().getHours() + 8)).toISOString() <
+        data.createdAt
+      ) {
+        toast.error("date is invalid");
+        return;
+      }
+      console.log(data);
+      // console.log(
+      //   new Date(new Date().setHours(new Date().getHours() + 8)).toISOString()
+      // );
+      // console.log(data.createdAt);
+      // console.log(
+      //   new Date(new Date().setHours(new Date().getHours() + 8)).toISOString() <
+      //     data.createdAt
+      // );
+
       const DATA = await addList(data);
       onClose();
 

@@ -51,16 +51,46 @@ export function SummaryPage() {
       const b = await axios.get(
         `/dashboard/search-line/${search.startDate}/${search.endDate}`
       );
-      console.log(b.data.data);
+      // console.log(b.data.data);
       setDataLine(b.data.data);
     } catch (err) {
       toast.error("plase select startdate and enddate");
     }
   };
   const handleChang = (e) => {
+    // if ("startDate" == e.target.name) {
+    //   setSearch((r) => ({
+    //     ...r,
+    //     startDate: new Date(
+    //       new Date(search.startDate).setHours(
+    //         new Date(search.startDate).getHours() - 24
+    //       )
+    //     ).toISOString(),
+    //   }));
+    // }
+    // if ("endDate" == e.target.name) {
+    //   setSearch((r) => ({
+    //     ...r,
+    //     endDate: new Date(
+    //       new Date(search.endDate).setHours(
+    //         new Date(search.endDate).getHours() + 24
+    //       )
+    //     ).toISOString(),
+    //   }));
+    // }
     setSearch({ ...search, [e.target.name]: e.target.value });
   };
 
+  // new Date.setTime();
+  // console.log(new Date().se)
+  // console.log(
+  //   new Date(
+  //     new Date(search.startDate).setHours(
+  //       new Date(search.startDate).getHours() + 24
+  //     )
+  //   ).toISOString(),
+  //   "q"
+  // );
   return (
     <div className="flex flex-col w-[80vw] mx-auto pt-10 gap-4 ">
       <div>
