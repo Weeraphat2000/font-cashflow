@@ -27,9 +27,6 @@ function ActivityPage() {
   useEffect(() => {
     setSearchList(allList.filter((item) => item.createdAt.includes(search)));
     run();
-    if (allList.filter((item) => item.createdAt.includes(search)) == 0) {
-      setHasMore(false);
-    }
   }, [search]);
   const [hasMore, setHasMore] = useState(true);
   const fetchMoreData = async () => {
